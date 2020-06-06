@@ -7,3 +7,6 @@ Update permissions on devlog updating script (I'm running it with my IDE, not ev
 rawatP -- 10:12:54
 Add basic project description to README
 
+rawatP -- 10:16:58
+Add API descriptions to project
+
