@@ -10,3 +10,6 @@ Add basic project description to README
 rawatP -- 10:16:58
 Add API descriptions to project
 
+rawatP -- 10:32:36
+Update README with team roles and API used
+
