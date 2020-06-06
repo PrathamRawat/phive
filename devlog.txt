@@ -4,3 +4,6 @@ Add devlog updating script to project
 rawatP -- 10:12:35
 Update permissions on devlog updating script (I'm running it with my IDE, not everyone might)
 
+rawatP -- 10:12:54
+Add basic project description to README
+
