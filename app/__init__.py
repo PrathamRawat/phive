@@ -14,7 +14,7 @@ def home():
 def sign_in():
     return render_template("signin.html")
 
-@app.route('verify')
+@app.route('/verify')
 def verify():
     username = request.form('username')
     cmd = 'SELECT password FROM users WHERE username=?'
