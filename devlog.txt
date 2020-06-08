@@ -13,3 +13,6 @@ Add API descriptions to project
 rawatP -- 10:32:36
 Update README with team roles and API used
 
+leeJ -- 21:43:08
+created login and account creation functionality, which depends on database code not yet implemented
+
