@@ -1,9 +1,9 @@
-from flask import Flask, render_template, request, flash, redirect, url_for
+from flask import Flask, render_template, request, flash, redirect, url_for, session
 import sqlite3
 app = Flask(__name__)
 
 def execute(cmd, args):
-    #TO-DO: Write fxn to execute the database commands and return any results
+    #TODO: Write fxn to execute the database commands and return any results
     pass
 
 @app.route("/")
@@ -47,14 +47,30 @@ def create_account():
     cmd = 'SELECT id FROM users WHERE username=?'
     session['uid'] = execute(cmd, (username))
     flash('Account successfully created.', 'success')
-    return redirect(url_for('homepage'))
+    # TODO: Add default clothing to newly created accounts
+    return redirect(url_for('settings'))
 
 @app.route("/homepage")
 def homepage():
+    # TODO: List recommendations if not chosen yet, otherwise list outfit chosen
+    # TODO: Also list the weather for the day
     return render_template("homepage.html")
+
+def get_recommendations():
+    recommendations = list()
+    # TODO: Use weights to come up with a number of recommendations listed in order of most to least strong
+    return recommendations
+
+@app.route("/update_weights")
+def update_weights():
+#     TODO: Get some form data or somethign to indicate which of the recommendations was chosen
+#     TODO: Strengthen the weights between the clothes that were chosen together, and weaken the weights between the ones that weren't
+    return redirect(url_for('homepage'))
 
 @app.route("/settings")
 def settings():
+    # TODO: Display all articles of clothing
+    # - Allow for users to remove clothing, and change each of its settings
     return render_template("settings.html")
 
 @app.route("/add_clothing")
