@@ -57,6 +57,10 @@ def homepage():
 def settings():
     return render_template("settings.html")
 
+@app.route("/add_clothing")
+def add_clothing():
+    return redirect(url_for('settings'))
+
 if __name__ == "__main__":
     app.debug = True
     app.run()
