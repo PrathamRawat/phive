@@ -16,3 +16,6 @@ Update README with team roles and API used
 leeJ -- 21:43:08
 created login and account creation functionality, which depends on database code not yet implemented
 
+rawatP -- 17:53:08
+add TODO comments around the code
+
