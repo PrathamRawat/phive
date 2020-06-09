@@ -28,3 +28,6 @@ began work on matrix maths, added route add_clothing
 rawatP -- 23:54:06
 fix minor line issue in devlog
 
+leeJ -- 08:22:38
+added more matrix functions
+
