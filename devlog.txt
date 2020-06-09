@@ -18,4 +18,6 @@ created login and account creation functionality, which depends on database code
 
 rawatP -- 17:53:08
 add TODO comments around the code
+xiedengD -- 21:47:15
+Added basic inheritance to templates
 
