@@ -75,6 +75,10 @@ def settings():
 
 @app.route("/add_clothing")
 def add_clothing():
+    name = request.form['name']
+    picture = request.form['picture']
+    cmd = 'INSERT INTO clothing VALUES (?, ?, ?)'
+    execute(cmd, (session['uid'], name, picture))
     return redirect(url_for('settings'))
 
 if __name__ == "__main__":
