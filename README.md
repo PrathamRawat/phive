@@ -1,6 +1,7 @@
 # Drip by team "Cot Topic"
 
-##Roles
+## Roles
+
 Pratham Rawat
 - Project Manager
 
