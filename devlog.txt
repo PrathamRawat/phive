@@ -40,3 +40,6 @@ added methods to insert values into user table and clothing table
 tanM -- 03:26:19
 added get methods for data. added change weights for users
 
+leeJ -- 13:26:25
+implemented weather functionality
+
