@@ -5,9 +5,7 @@ class Matrix:
 
     value = None
 
-    def __init__(self, matrix):
-        self.value = matrix
-
+    @staticmethod
     def multiply(matrix1, matrix2):
         m1 = matrix1.value
         m2 = matrix2.value
@@ -22,7 +20,10 @@ class Matrix:
                 v2 = [i[x] for i in m2]
                 row.append(sum([v1[i] * v2[i] for i in range(len(v1))]))
             result.append(row)
-        return result
+        return Matrix(result)
+
+    def __init__(self, matrix=[]):
+        self.value = matrix
 
     def add_row(self, values):
         if len(self.value) == 0:
@@ -41,3 +42,6 @@ class Matrix:
                 self.value[x].append(values[x])
         else:
             raise IncompatibleMatricesError('Column cannot be added to matrix')
+    
+    def matrix(self):
+        return self.value

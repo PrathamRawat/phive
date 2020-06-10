@@ -1,10 +1,8 @@
 from flask import Flask, render_template, request, flash, redirect, url_for, session
-import sqlite3
+from app.utl.matrix import Matrix
+from app.data.data import *
+import sqlite3, urllib3, json
 app = Flask(__name__)
-
-def execute(cmd, args):
-    #TODO: Write fxn to execute the database commands and return any results
-    pass
 
 @app.route("/")
 def home():
@@ -17,13 +15,12 @@ def sign_in():
 @app.route('/verify')
 def verify():
     username = request.form('username')
-    cmd = 'SELECT password FROM users WHERE username=?'
-    password = execute(cmd, (username))
-    if password == request.form['password']:
-        cmd = 'SELECT id FROM users WHERE username=?'
-        session['uid'] = execute(cmd, (username))
-        flash('Successfully logged in.', 'success')
-        return redirect(url_for('homepage'))
+    # TODO: Check username + password pair
+    #if password do match
+    session['uid'] = getUser(username)
+    flash('Successfully logged in.', 'success') 
+    return redirect(url_for('homepage'))
+    #if password doesn't match
     flash('Incorrect username/password combination!', 'error')
     return redirect(url_for('sign_in'))
 
@@ -34,32 +31,39 @@ def sign_up():
 @app.route("/create", methods=['POST'])
 def create_account():
     username = request.form['username']
-    cmd = 'SELECT password FROM users WHERE username=?'
-    if execute(cmd, (username)):
-        flash('Username is taken!', 'error')
-        return redirect(url_for('sign_up'))
-    password = request.form['password']
+    # TODO: verify that the username is unique
+    password = request.form['username']
     if password != request.form['verify']:
-        flash('Passwords do not match!', 'error')
+        flash('Passwords do not match.', 'error')
         return redirect(url_for('sign_up'))
-    cmd = 'INSERT INTO users VALUES (?, ?, ?)'
-    execute(cmd, (username, password, []))
-    cmd = 'SELECT user_id FROM users WHERE username=?'
-    session['uid'] = execute(cmd, (username))
+    session['uid'] = addUsers(username, password, [])
     flash('Account successfully created.', 'success')
-    # TODO: Add default clothing to newly created accounts
     return redirect(url_for('settings'))
 
 @app.route("/homepage")
 def homepage():
     # TODO: List recommendations if not chosen yet, otherwise list outfit chosen
-    # TODO: Also list the weather for the day
-    return render_template("homepage.html")
+    (name, weather, temp, high, low) = get_weather(request.environ['REMOTE_ADDR'])
+    if not outfit:
+        # TODO: create outfit based on weather
+        print('')
+    return render_template("homepage.html", outfit=outfit, temp=(temp,high,low), weather=name)
 
-def get_recommendations():
-    recommendations = list()
-    # TODO: Use weights to come up with a number of recommendations listed in order of most to least strong
-    return recommendations
+def get_recommendations(uid, weather):
+    weight = getWeight(uid)
+    return Matrix.multiply(Matrix([weather]), weight)
+
+def get_weather(ip):
+    http = urllib3.PoolManager()
+    r = http.request('GET', 'http://ip-api.com/json/%s' % ip)
+    data = json.loads(r.data)
+    lat = data['lat']
+    lon = data['lon']
+    r = http.request('GET', 'https://www.metaweather.com/api/location/search/?lattlong=%.2f,%.2f' % (lat, lon))
+    woeid = json.loads(r.data)[0]['woeid']
+    r = http.request('GET', 'https://www.metaweather.com/api/location/%d' % woeid)
+    data = json.loads(r.data)['consolidated_weather']
+    return (data['weather_state_name'], data['weather_state_abbr'], data['the_temp'], data['min_temp'], data['max_temp']) 
 
 @app.route("/update_weights")
 def update_weights():
@@ -77,8 +81,7 @@ def settings():
 def add_clothing():
     name = request.form['name']
     picture = request.form['picture']
-    cmd = 'INSERT INTO clothing VALUES (?, ?, ?)'
-    execute(cmd, (session['uid'], name, picture))
+    addClothing(session['uid'], name, picture)
     return redirect(url_for('settings'))
 
 if __name__ == "__main__":
