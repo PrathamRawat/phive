@@ -33,7 +33,7 @@ def sign_up():
 
 @app.route("/create", methods=['POST'])
 def create_account():
-    username = request.form('username')
+    username = request.form['username']
     cmd = 'SELECT password FROM users WHERE username=?'
     if execute(cmd, (username)):
         flash('Username is taken!', 'error')
@@ -44,7 +44,7 @@ def create_account():
         return redirect(url_for('sign_up'))
     cmd = 'INSERT INTO users VALUES (?, ?, ?)'
     execute(cmd, (username, password, []))
-    cmd = 'SELECT id FROM users WHERE username=?'
+    cmd = 'SELECT user_id FROM users WHERE username=?'
     session['uid'] = execute(cmd, (username))
     flash('Account successfully created.', 'success')
     # TODO: Add default clothing to newly created accounts

@@ -1,1 +1,15 @@
 {% extends "base.html" %}
+{% block body %}
+<form action='/create', method="POST">
+    Username:
+    <input type = 'text' name = 'username' >
+    <br>
+    Password:
+    <input type = 'password' name = 'password' >
+    <br>
+    Verify password:
+    <input type = 'password' name = 'verify' >
+    <br>
+    <input type = 'submit' name = 'sub1'>
+</form>
+{% endblock body %}
