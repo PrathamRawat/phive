@@ -7,7 +7,7 @@ c = db.cursor()               #facilitate db ops
 
 
 def createUsers():
-    command = "CREATE TABLE IF NOT EXISTS users (user_id INTEGER PRIMARY KEY, username TEXT, password TEXT, weights REAL);"
+    command = "CREATE TABLE IF NOT EXISTS users (user_id INTEGER PRIMARY KEY, username TEXT, password TEXT, weights BLOB);"
     c.execute(command)
     return None
 
