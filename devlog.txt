@@ -43,3 +43,6 @@ added get methods for data. added change weights for users
 leeJ -- 13:26:25
 implemented weather functionality
 
+xiedengD -- 11:31:43
+Added navbar
+
