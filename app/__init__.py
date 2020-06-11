@@ -7,14 +7,6 @@ app = Flask(__name__)
 
 app.secret_key = 'temp key'
 
-def login_required(f):
-    @wraps(f)
-    def login_check(*args, **kwargs):
-        if 'uid' not in session:
-            flash('You must be logged in to view that page', 'error')
-            return redirect(url_for('sign_in'))
-        return f(*args, **kwargs)
-    return login_check
 
 @app.route("/")
 def home():
@@ -53,7 +45,6 @@ def create_account():
     return redirect(url_for('settings'))
 
 @app.route("/homepage")
-@login_required
 def homepage():
     # TODO: List recommendations if not chosen yet, otherwise list outfit chosen
     outfit = getOutfit(session['uid'], date.today())
@@ -99,7 +90,6 @@ def get_weather(ip):
     return (data['weather_state_name'], data['weather_state_abbr'], data['the_temp'], data['min_temp'], data['max_temp']) 
 
 @app.route("/update_weights", methods=['POST'])
-@login_required
 def update_weights():
     (name, weather, temp, high, low) = get_weather(request.environ['REMOTE_ADDR'])
     w = Matrix([
@@ -128,20 +118,17 @@ def update_weights():
     return redirect(url_for('homepage'))
 
 @app.route("/settings")
-@login_required
 def settings():
     clothes = getAllClothing(session['uid'])
     return render_template("settings.html", clothes=clothes)
 
 @app.route("remove_clothing", methods=['POST'])
-@login_required
 def remove_clothing():
     clothing_id = request['id']
     removeClothing(clothing_id)
     return redirect(url_for('settings'))
 
 @app.route("/add_clothing", methods=['POST'])
-@login_required
 def add_clothing():
     name = request.form['name']
     picture = request.form['picture']
