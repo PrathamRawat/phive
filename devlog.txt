@@ -52,3 +52,6 @@ added decorator to check login status
 leeJ -- 13:21:16
 implemented outfit selection and weight updating functionality
 
+leeJ -- 13:29:14
+updated code based on issues raised on github
+
