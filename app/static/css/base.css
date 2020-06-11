@@ -1,0 +1,26 @@
+.navbar{
+  background-color: #335C81;
+}
+
+.filler{
+  color: red;
+  background-color: black;
+}
+
+#bottombar{
+  position: fixed;
+  width: 100%;
+  bottom: 0px;
+  color: #65AFFF;
+  background-color: #1B2845;
+}
+
+body {
+  background-color: #65AFFF;
+}
+
+html, body{
+  margin: 0px;
+  height: 100%;
+  width: 100%
+}
