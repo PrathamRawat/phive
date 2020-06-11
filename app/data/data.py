@@ -7,12 +7,12 @@ c = db.cursor()               #facilitate db ops
 
 
 def createUsers():
-    command = "CREATE TABLE IF NOT EXISTS users (user_id INTEGER PRIMARY KEY, username TEXT, password TEXT, weights BLOB);"
+    command = "CREATE TABLE IF NOT EXISTS users (user_id INTEGER PRIMARY KEY, username TEXT, password TEXT, weights BLOB, outfit BLOB);"
     c.execute(command)
     return None
 
 def createClothing():
-    command = "CREATE TABLE IF NOT EXISTS clothing (clothing_id INTEGER PRIMARY KEY, user_id INTEGER, name TEXT, picture TEXT);"
+    command = "CREATE TABLE IF NOT EXISTS clothing (clothing_id INTEGER PRIMARY KEY, user_id INTEGER, name TEXT, type TEXT, picture TEXT);"
     c.execute(command)
     return None
 
@@ -26,13 +26,13 @@ def addUsers(username, password, weights):
     q = c.fetchall()
     new_id = q[-1][0] + 1
     print(new_id)
-    command = "INSERT INTO users VALUES({},\"{}\",\"{}\", {})".format(new_id, username, password, weights)
+    command = "INSERT INTO users VALUES({},\"{}\",\"{}\",{},{})".format(new_id, username, password, weights, [])
     c.execute(command)
     print(new_id)
     return(new_id)
 
 
-def addClothing(user_id, name, picture):
+def addClothing(user_id, name, ctype, picture):
     """
     adds a new clothing item. returns clothing_id
     """
@@ -41,7 +41,7 @@ def addClothing(user_id, name, picture):
     q = c.fetchall()
     new_id = q[-1][0] + 1
     print(new_id)
-    command = "INSERT INTO clothing VALUES({},{},\"{}\",\"{}\")".format(new_id, user_id, name, picture)
+    command = "INSERT INTO clothing VALUES({},{},\"{}\",{},\"{}\")".format(new_id, user_id, name, ctype, picture)
     c.execute(new_id)
     return(new_id)
 
@@ -60,7 +60,7 @@ def getAllClothing(user_id):
     """
     returns array of (item,link) for each item with user_id
     """
-    command = "SELECT name,picture FROM clothing WHERE user_id = {}".format(user_id)
+    command = "SELECT clothing_id,name,picture FROM clothing WHERE user_id = {}".format(user_id)
     c.execute(command)
     result = c.fetchall()
     print(result)
