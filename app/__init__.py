@@ -1,6 +1,6 @@
 from flask import Flask, render_template, request, flash, redirect, url_for, session
-from app.utl.matrix import Matrix
-from app.data.data import *
+from utl.matrix import Matrix
+from data.data import *
 import sqlite3, urllib3, json
 app = Flask(__name__)
 
@@ -18,7 +18,7 @@ def verify():
     # TODO: Check username + password pair
     #if password do match
     session['uid'] = getUser(username)
-    flash('Successfully logged in.', 'success') 
+    flash('Successfully logged in.', 'success')
     return redirect(url_for('homepage'))
     #if password doesn't match
     flash('Incorrect username/password combination!', 'error')
@@ -63,7 +63,7 @@ def get_weather(ip):
     woeid = json.loads(r.data)[0]['woeid']
     r = http.request('GET', 'https://www.metaweather.com/api/location/%d' % woeid)
     data = json.loads(r.data)['consolidated_weather']
-    return (data['weather_state_name'], data['weather_state_abbr'], data['the_temp'], data['min_temp'], data['max_temp']) 
+    return (data['weather_state_name'], data['weather_state_abbr'], data['the_temp'], data['min_temp'], data['max_temp'])
 
 @app.route("/update_weights")
 def update_weights():
