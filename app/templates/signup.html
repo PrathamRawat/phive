@@ -1,20 +1,45 @@
 {% extends "base.html" %}
 
+{% block extraStyling %}
+  <link rel="stylesheet" href="../static/css/signup.css" />
+{% endblock extraStyling %}
+
 {% block body %}
 <div class="container">
-  <center>
-    <form action='/create', method="POST">
-        Username:
+  <div class="row">
+    <div class="col">
+      <!-- spacing col -->
+    </div>
+    <div class="col-xl">
+      <!-- form col -->
+      <form action='/create', method="POST">
+        <div class="form-group">
+          <label for="username">Username</label>
+          <input type="text" name="username">
+        </div>
+        <!-- Username:
         <input type = 'text' name = 'username' >
-        <br>
-        Password:
+          <br> -->
+        <div class="form-group">
+          <label for="password">Password</label>
+          <input type="password" name="password">
+        </div>
+        <!-- Password:
         <input type = 'password' name = 'password' >
-        <br>
-        Verify password:
+          <br> -->
+        <div class="form-group">
+          <label for="verify">Verify Password</label>
+          <input type="password" name="verify">
+        </div>
+        <!-- Verify password:
         <input type = 'password' name = 'verify' >
-        <br>
+          <br> -->
         <input type = 'submit' name = 'sub1'>
-    </form>
-  </center>
+      </form>
+    </div>
+    <div class="col">
+      <!-- spacing col -->
+    </div>
+  </div>
 </div>
 {% endblock body %}
