@@ -46,9 +46,14 @@ implemented weather functionality
 xiedengD -- 11:31:43
 Added navbar
 
+leeJ -- 11:58:42
+updated data type of weight in database
+
 xiedengD -- 12:21:43
 Styled the base html
 
+leeJ -- 12:43:52
+added decorator to check login status
+
 xiedengD -- 12:57:08
 Styling Sign up; converted forms to bootstrap forms
-
