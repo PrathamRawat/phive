@@ -1,6 +1,6 @@
 from flask import Flask, render_template, request, flash, redirect, url_for, session
-from app.utl.matrix import Matrix
-from app.data.data import *
+from utl.matrix import Matrix
+from data.data import *
 from datetime import date
 import sqlite3, urllib3, json
 app = Flask(__name__)
@@ -122,7 +122,7 @@ def settings():
     clothes = getAllClothing(session['uid'])
     return render_template("settings.html", clothes=clothes)
 
-@app.route("remove_clothing", methods=['POST'])
+@app.route("/remove_clothing", methods=['POST'])
 def remove_clothing():
     clothing_id = request['id']
     removeClothing(clothing_id)
