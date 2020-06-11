@@ -1,8 +1,12 @@
+from datetime import date
+import sqlite3, json
+
 from flask import Flask, render_template, request, flash, redirect, url_for, session
+import urllib3
+
 from utl.matrix import Matrix
 from data.data import *
-from datetime import date
-import sqlite3, urllib3, json
+
 app = Flask(__name__)
 
 app.secret_key = 'temp key'
