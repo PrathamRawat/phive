@@ -46,3 +46,6 @@ implemented weather functionality
 xiedengD -- 11:31:43
 Added navbar
 
+xiedengD -- 12:21:43
+Styled the base html
+
