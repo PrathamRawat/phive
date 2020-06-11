@@ -43,3 +43,6 @@ added get methods for data. added change weights for users
 leeJ -- 13:26:25
 implemented weather functionality
 
+leeJ -- 11:58:42
+updated data type of weight in database
+
