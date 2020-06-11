@@ -49,3 +49,6 @@ Added navbar
 xiedengD -- 12:21:43
 Styled the base html
 
+xiedengD -- 12:57:08
+Styling Sign up; converted forms to bootstrap forms
+
