@@ -49,3 +49,6 @@ updated data type of weight in database
 leeJ -- 12:43:52
 added decorator to check login status
 
+leeJ -- 13:21:16
+implemented outfit selection and weight updating functionality
+
