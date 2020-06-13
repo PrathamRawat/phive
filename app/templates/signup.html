@@ -4,6 +4,10 @@
   <link rel="stylesheet" href="../static/css/signup.css" />
 {% endblock extraStyling %}
 
+{% block title %}
+  Register
+{% endblock title %}
+
 {% block body %}
 <div class="container">
   <br />
@@ -42,9 +46,18 @@
             <input type="password" name="verify">
           </div>
           <center>
-            <input type='submit' name='sub1' class="btn btn-primary" value="Sign In">
+            <input type='submit' name='sub1' class="btn btn-primary" value="Register">
           </center>
         </form>
+        <div>
+          <br />
+          <center>
+          Already signed up?
+            <a class="btn btn-primary" role="button" href="/sign_in">
+              Log in here!
+            </a>
+          </center>
+        </div>
       </div>
     </div>
     <div class="col">
