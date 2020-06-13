@@ -69,3 +69,6 @@ Add travis file, will be working on unittest script later
 xiedengD -- 06:13:05
 Finished Styling Sign-up page
 
+xiedengD -- 07:55:51
+Added sign in page
+
