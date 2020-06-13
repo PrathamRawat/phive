@@ -66,3 +66,6 @@ updated code based on issues raised on github
 
 rawatP -- 14:17:22
 Add travis file, will be working on unittest script later
+xiedengD -- 06:13:05
+Finished Styling Sign-up page
+
