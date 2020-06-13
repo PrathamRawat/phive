@@ -60,7 +60,7 @@ def getAllClothing(user_id):
     """
     returns array of (item,link) for each item with user_id
     """
-    command = "SELECT clothing_id,name,picture FROM clothing WHERE user_id = {}".format(user_id)
+    command = "SELECT clothing_id,name,type,picture FROM clothing WHERE user_id = {}".format(user_id)
     c.execute(command)
     result = c.fetchall()
     print(result)
@@ -84,6 +84,24 @@ def changeWeight(user_id, weight):
     command = "UPDATE users SET weights = \"{}\" WHERE user_id = {};".format(weight, user_id)
     c.execute(command)
     return(weight)
+
+def getOutfit(user_id, date):
+    """
+    returns the current day's outfit if chosen, else returns an empty list
+    """
+    command = "SELECT outfit FROM users WHERE user_id=?;"
+    c.execute(command, user_id)
+    day = c.fetchone()
+    if c[0] == date:
+        return c[1]
+    return []
+
+def setOutfit(user_id, outfit, date):
+    """
+    returns the current day's outfit if chosen, else returns an empty list
+    """
+    command = "UPDATE users SET outfit=? WHERE user_id=?;"
+    c.execute(command, [date, outfit], user_id)
 
 #addUsers('three', 'three', '30.0')
 #addUsers(2, 'aaa', 'bbb', '14.0')

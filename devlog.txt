@@ -57,3 +57,12 @@ added decorator to check login status
 
 xiedengD -- 12:57:08
 Styling Sign up; converted forms to bootstrap forms
+
+leeJ -- 13:21:16
+implemented outfit selection and weight updating functionality
+
+leeJ -- 13:29:14
+updated code based on issues raised on github
+
+rawatP -- 14:17:22
+Add travis file, will be working on unittest script later

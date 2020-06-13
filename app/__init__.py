@@ -1,3 +1,6 @@
+from datetime import date
+import sqlite3, json
+
 from flask import Flask, render_template, request, flash, redirect, url_for, session
 from utl.matrix import Matrix
 from data.data import *
@@ -6,14 +9,6 @@ app = Flask(__name__)
 
 app.secret_key = 'temp key'
 
-def login_required(f):
-    @wraps(f)
-    def login_check(*args, **kwargs):
-        if 'uid' not in session:
-            flash('You must be logged in to view that page', 'error')
-            return redirect(url_for('sign_in'))
-        return f(*args, **kwargs)
-    return login_check
 
 @app.route("/")
 def home():
@@ -52,14 +47,32 @@ def create_account():
     return redirect(url_for('settings'))
 
 @app.route("/homepage")
-@login_required
 def homepage():
     # TODO: List recommendations if not chosen yet, otherwise list outfit chosen
-    outfit = getOutfit(session['uid'])
+    outfit = getOutfit(session['uid'], date.today())
     (name, weather, temp, high, low) = get_weather(request.environ['REMOTE_ADDR'])
     if not outfit:
         # TODO: create outfit based on weather
-        print('')
+        w = Matrix([
+            1 if weather in ['sn', 'sl', 'h'] else 0,
+            1 if weather in ['t', 'hr', 'lr', 's'] else 0,
+            1 if weather in ['hc', 'lc', 'c'] else 0,
+            1 if temp < 40 else 0,
+            1 if 40 <= temp < 60 else 0,
+            1 if 60 <= temp < 80 else 0,
+            1 if 80 <= temp else 0
+        ])
+        rec = get_recommendations(session['uid'], w).matrix()[0]
+        clothes = getAllClothing(session['uid'])
+        magnitude = max(rec)
+        outfit = []
+        while 'bottom' not in [clothing[2] for clothing in outfit] and 'top' not in [clothing[2] for clothing in outfit] and magnitude > 0:
+            i = rec.index(magnitude)
+            rec.pop(i)
+            c = clothes.pop(i)
+            if c[2] not in [clothing[2] for clothing in outfit]:
+                outfit.append(c)
+        session['outfit'] = outfit
     return render_template("homepage.html", outfit=outfit, temp=(temp,high,low), weather=name)
 
 def get_recommendations(uid, weather):
@@ -79,34 +92,52 @@ def get_weather(ip):
     return (data['weather_state_name'], data['weather_state_abbr'], data['the_temp'], data['min_temp'], data['max_temp'])
 
 @app.route("/update_weights", methods=['POST'])
-@login_required
 def update_weights():
-#     TODO: Get some form data or somethign to indicate which of the recommendations was chosen
-#     TODO: Strengthen the weights between the clothes that were chosen together, and weaken the weights between the ones that weren't
+    (name, weather, temp, high, low) = get_weather(request.environ['REMOTE_ADDR'])
+    w = Matrix([
+        1 if weather in ['sn', 'sl', 'h'] else 0,
+        1 if weather in ['t', 'hr', 'lr', 's'] else 0,
+        1 if weather in ['hc', 'lc', 'c'] else 0,
+        1 if temp < 40 else 0,
+        1 if 40 <= temp < 60 else 0,
+        1 if 60 <= temp < 80 else 0,
+        1 if 80 <= temp else 0
+    ])
+    clothing = getAllClothing(session['uid'])
+    if request.form['new']:
+        weights = getWeight(session['uid'])
+        for item in session['outfit']:
+            i = clothing.index(item)
+            for condition in range(7):
+                weights.matrix()[condition][i] = weights.matrix()[condition][i] - w.matrix()[condition] / 3
+        return render_template('select.html', clothes=clothing)
+    setOutfit(session['uid'], session['outfit'], date.today())
+    weights = getWeight(session['uid'])
+    for item in session['outfit']:
+        i = clothing.index(item)
+        for condition in range(7):
+            weights.matrix()[condition][i] = weights.matrix()[condition][i] + w.matrix()[condition] / 3
     return redirect(url_for('homepage'))
 
 @app.route("/settings")
-@login_required
 def settings():
     clothes = getAllClothing(session['uid'])
     return render_template("settings.html", clothes=clothes)
 
-@app.route("remove_clothing", methods=['POST'])
-@login_required
+@app.route("/remove_clothing", methods=['POST'])
 def remove_clothing():
     clothing_id = request['id']
     removeClothing(clothing_id)
     return redirect(url_for('settings'))
 
 @app.route("/add_clothing", methods=['POST'])
-@login_required
 def add_clothing():
     name = request.form['name']
     picture = request.form['picture']
     ctype = request.form['ctype']
     addClothing(session['uid'], name, ctype, picture)
     matrix = getWeight(session['uid'])
-    matrix.add_column([0, 0, 0, 0, 0, 0, 0])
+    matrix.add_column([0.1, 0.1, 0.1, 0.1, 0.1, 0.1, 0.1])
     return redirect(url_for('settings'))
 
 if __name__ == "__main__":
