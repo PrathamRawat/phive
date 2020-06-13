@@ -18,7 +18,7 @@ def home():
 def sign_in():
     return render_template("signin.html")
 
-@app.route('/verify')
+@app.route('/verify', methods=['GET'])
 def verify():
     username = request.form('username')
     # TODO: Check username + password pair
