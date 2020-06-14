@@ -10,7 +10,7 @@ def createUsers():
     DB_FILE = "Drip.db"
     db = sqlite3.connect(DB_FILE) #opens existing file or it makes new one if it does not exit
     c = db.cursor()               #facilitate db ops
-    command = "CREATE TABLE IF NOT EXISTS users (user_id INTEGER PRIMARY KEY, username TEXT, password TEXT, weights BLOB, outfit BLOB);"
+    command = "CREATE TABLE IF NOT EXISTS users (user_id INTEGER PRIMARY KEY, username TEXT, password TEXT, weights TEXT, outfit TEXT);"
     c.execute(command)
     db.commit() #save changes
     db.close()  #close database
@@ -40,7 +40,7 @@ def addUsers(username, password, weights):
     new_id = q[-1][0] + 1
     #q[-1][0] + 1
     print(new_id)
-    command = "INSERT INTO users VALUES({},\"{}\",\"{}\",{},{});".format(new_id, username, password, weights, 0)
+    command = "INSERT INTO users VALUES({},\"{}\",\"{}\",\"{}\",\"{}\");".format(new_id, username, password, weights, "outfit")
     c.execute(command)
     db.commit() #save changes
     db.close()  #close database

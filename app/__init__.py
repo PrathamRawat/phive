@@ -20,7 +20,7 @@ def sign_in():
 
 @app.route('/verify', methods=['GET'])
 def verify():
-    username = request.form('username')
+    username = request.form['username']
     # TODO: Check username + password pair
     #if password do match
     session['uid'] = getUser(username)
