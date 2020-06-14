@@ -42,7 +42,7 @@ def create_account():
     if password != request.form['verify']:
         flash('Passwords do not match.', 'error')
         return redirect(url_for('sign_up'))
-    session['uid'] = addUsers(username, password, Matrix())
+    session['uid'] = addUsers(username, password, 0)#Matrix()
     flash('Account successfully created.', 'success')
     return redirect(url_for('settings'))
 
