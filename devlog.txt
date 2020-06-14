@@ -72,3 +72,6 @@ Finished Styling Sign-up page
 
 xiedengD -- 07:55:51
 Added sign in page
+tanM -- 12:13:57
+tweaked databases and database methods. added columns and changed types
+
