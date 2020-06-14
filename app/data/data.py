@@ -151,7 +151,7 @@ def setOutfit(user_id, outfit, date):
     db = sqlite3.connect(DB_FILE) #opens existing file or it makes new one if it does not exit
     c = db.cursor()               #facilitate db ops
     command = "UPDATE users SET outfit=? WHERE user_id=?;"
-    c.execute(command, [date, outfit], user_id)
+    c.execute(command, [date, ','.join(outfit)], user_id)
     db.commit() #save changes
     db.close()  #close database
 
