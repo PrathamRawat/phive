@@ -49,7 +49,10 @@ def create_account():
 @app.route("/homepage")
 def homepage():
     # TODO: List recommendations if not chosen yet, otherwise list outfit chosen
-    outfit = getOutfit(session['uid'], date.today())
+    try:
+        outfit = getOutfit(session['uid'], date.today())
+    except:
+        return redirect(url_for("sign_in"))
     (name, weather, temp, high, low) = get_weather(request.environ['REMOTE_ADDR'])
     if not outfit:
         # TODO: create outfit based on weather
