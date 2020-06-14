@@ -75,3 +75,6 @@ Added sign in page
 tanM -- 12:13:57
 tweaked databases and database methods. added columns and changed types
 
+leeJ -- 12:57:23
+modified Matrix class, changed how weights are stored in the database
+
