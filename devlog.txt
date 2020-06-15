@@ -43,11 +43,20 @@ added get methods for data. added change weights for users
 leeJ -- 13:26:25
 implemented weather functionality
 
+xiedengD -- 11:31:43
+Added navbar
+
 leeJ -- 11:58:42
 updated data type of weight in database
 
+xiedengD -- 12:21:43
+Styled the base html
+
 leeJ -- 12:43:52
 added decorator to check login status
+
+xiedengD -- 12:57:08
+Styling Sign up; converted forms to bootstrap forms
 
 leeJ -- 13:21:16
 implemented outfit selection and weight updating functionality
@@ -57,4 +66,15 @@ updated code based on issues raised on github
 
 rawatP -- 14:17:22
 Add travis file, will be working on unittest script later
+
+xiedengD -- 06:13:05
+Finished Styling Sign-up page
+
+xiedengD -- 07:55:51
+Added sign in page
+tanM -- 12:13:57
+tweaked databases and database methods. added columns and changed types
+
+leeJ -- 12:57:23
+modified Matrix class, changed how weights are stored in the database
 

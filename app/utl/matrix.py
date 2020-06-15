@@ -3,12 +3,8 @@ class IncompatibleMatricesError(ValueError):
 
 class Matrix:
 
-    value = None
-
     @staticmethod
-    def multiply(matrix1, matrix2):
-        m1 = matrix1.value
-        m2 = matrix2.value
+    def multiply(m1, m2):
         if len(m1[0]) != len(m2):
             raise IncompatibleMatricesError('Matrices cannot be multiplied!')
             return -1
@@ -20,28 +16,34 @@ class Matrix:
                 v2 = [i[x] for i in m2]
                 row.append(sum([v1[i] * v2[i] for i in range(len(v1))]))
             result.append(row)
-        return Matrix(result)
+        return result
 
-    def __init__(self, matrix=[]):
-        self.value = matrix
-
-    def add_row(self, values):
-        if len(self.value) == 0:
-            self.value.append(values)
-        elif len(self.value[0]) == len(values):
-            self.value.append(values)
+    @staticmethod
+    def add_row(m, values):
+        if len(m) == 0:
+            m.append(values)
+        elif len(m[0]) == len(values):
+            m.append(values)
         else:
             raise IncompatibleMatricesError('Row cannot be added to matrix')
     
-    def add_column(self, values):
-        if len(self.value) == 0:
+    @staticmethod
+    def add_column(m, values):
+        if len(m) == 0:
             for x in values:
-                self.value.append([x])
-        elif len(self.value) == len(values):
+                m.append([x])
+        elif len(m) == len(values):
             for x in range(len(values)):
-                self.value[x].append(values[x])
+                m[x].append(values[x])
         else:
             raise IncompatibleMatricesError('Column cannot be added to matrix')
     
-    def matrix(self):
-        return self.value
+    @staticmethod
+    def read(matrixstr):
+        rows = matrixstr.split('\\')
+        return map(lambda x: x.split('&'), rows)
+
+    @staticmethod
+    def toString(matrix):
+        rows = map(lambda x: '&'.join(map(str, x)), matrix)
+        return '\\'.join(rows)

@@ -1,1 +1,67 @@
 {% extends "base.html" %}
+
+{% block title %}
+  Log in
+{% endblock title %}
+
+
+{% block extraStyling %}
+  <link rel="stylesheet" href="../static/css/signup.css" />
+{% endblock extraStyling %}
+
+{% block body %}
+  <div class="container">
+    <br />
+    {% with messages = get_flashed_messages() %}
+      {% if messages %}
+
+        {% for message in messages %}
+        <div class="alert alert-danger" role="alert">
+          {{ message }}
+          <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+          </button>
+        </div>
+        {% endfor %}
+
+      {% endif %}
+      {% endwith %}
+    <div class="row">
+      <div class="col">
+        <!-- spacing col -->
+      </div>
+      <div class="col">
+        <!-- form col -->
+        <div id="form-block">
+          <form action='/verify'>
+            <div class="form-group">
+              <label for="username">Username: </label>
+              <input type="text" name="username">
+            </div>
+            <div class="form-group">
+              <label for="password">Password: </label>
+              <input type="password" name="password">
+            </div>
+            <center>
+              <input type='submit' name='sub1' class="btn btn-primary" value="Log In">
+            </center>
+          </form>
+          <!-- diverting button -->
+          <div>
+            <br />
+            <center>
+            Not signed up?
+              <a class="btn btn-primary" role="button" href="/sign_up">
+                Register here!
+              </a>
+            </center>
+          </div>
+        </div>
+
+      </div>
+      <div class="col">
+        <!-- spacing col -->
+      </div>
+    </div>
+  </div>
+{% endblock body %}
