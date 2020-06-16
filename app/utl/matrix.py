@@ -41,9 +41,9 @@ class Matrix:
     @staticmethod
     def read(matrixstr):
         rows = matrixstr.split('\\')
-        return map(lambda x: x.split('&'), rows)
+        return list(map(lambda x: x.split('&'), rows))
 
     @staticmethod
     def toString(matrix):
-        rows = map(lambda x: '&'.join(map(str, x)), matrix)
+        rows = list(map(lambda x: '&'.join(map(str, x)), matrix))
         return '\\'.join(rows)
