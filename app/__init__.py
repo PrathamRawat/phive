@@ -18,7 +18,7 @@ def home():
 def sign_in():
     return render_template("signin.html")
 
-@app.route('/verify', methods=['GET'])
+@app.route('/verify', methods=['POST'])
 def verify():
     username = request.form['username']
     if request.form['password'] == getPassword(username):
@@ -49,10 +49,7 @@ def create_account():
 @app.route("/homepage")
 def homepage():
     # TODO: List recommendations if not chosen yet, otherwise list outfit chosen
-    try:
-        outfit = getOutfit(session['uid'], date.today()).split(',')
-    except:
-        return redirect(url_for("sign_in"))
+    outfit = getOutfit(session['uid'], date.today())
     (name, weather, temp, high, low) = get_weather(request.environ['REMOTE_ADDR'])
     if not outfit:
         w = [[
@@ -85,12 +82,16 @@ def get_weather(ip):
     http = urllib3.PoolManager()
     r = http.request('GET', 'http://ip-api.com/json/%s' % ip)
     data = json.loads(r.data)
-    lat = data['lat']
-    lon = data['lon']
-    r = http.request('GET', 'https://www.metaweather.com/api/location/search/?lattlong=%.2f,%.2f' % (lat, lon))
-    woeid = json.loads(r.data)[0]['woeid']
+    if(data['status'] == 'fail'):
+        woeid = 2459115 # for NYC
+    else:
+        lat = data['lat']
+        lon = data['lon']
+        r = http.request('GET', 'https://www.metaweather.com/api/location/search/?lattlong=%.2f,%.2f' % (lat, lon))
+        woeid = json.loads(r.data)[0]['woeid']
     r = http.request('GET', 'https://www.metaweather.com/api/location/%d' % woeid)
-    data = json.loads(r.data)['consolidated_weather']
+    data = json.loads(r.data)['consolidated_weather'][0]
+    print(r.data)
     return (data['weather_state_name'], data['weather_state_abbr'], data['the_temp'], data['min_temp'], data['max_temp'])
 
 @app.route("/update_weights", methods=['POST'])
@@ -123,6 +124,7 @@ def update_weights():
 @app.route("/settings")
 def settings():
     clothes = getAllClothing(session['uid'])
+    print(clothes)
     return render_template("settings.html", clothes=clothes)
 
 @app.route("/remove_clothing", methods=['POST'])

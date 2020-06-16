@@ -172,12 +172,12 @@ def getOutfit(user_id, date):
     db = sqlite3.connect(DB_FILE) #opens existing file or it makes new one if it does not exit
     c = db.cursor()               #facilitate db ops
     command = "SELECT outfit FROM users WHERE user_id=?;"
-    c.execute(command, user_id)
+    c.execute(command, (user_id,))
     day = c.fetchone()
     db.commit() #save changes
     db.close()  #close database
-    if c[0] == date:
-        return c[1]
+    if day[0] == date:
+        return day[1]
     return []
 
 def setOutfit(user_id, outfit, date):
