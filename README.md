@@ -30,3 +30,13 @@ Drip also learns from your preferences, every morning it greets you with a numbe
 [MetaWeather](https://docs.google.com/document/d/18uyXB5XPFQoGFJpoa2yQvRPhevc3HaBU4kO-OYN-ieY/edit?usp=drivesdk)  
 - Used to get the location at which to use weather forecasts that power this app, from either the user's IP location, or an inputted location
  
+## Running Instructions
+
+Clone the repository, and in the repository root, run `pip3 install -r requirements.txt`, which will install the python packages required for this project.
+
+Afterwards, simply use python3 to run the main project file as follows:
+`python3 app/__init__.py`
+
+The site can be found on `http:/localhost:5000`
+
+Happy Drip!
