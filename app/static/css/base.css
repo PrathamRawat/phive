@@ -9,11 +9,15 @@
 
 #bottombar{
   position: fixed;
-  width: 100%;
   bottom: 0px;
+  width: 100%;
   margin-top: 10px;
   color: #65AFFF;
   background-color: #1B2845;
+}
+
+#main{
+  margin-bottom: 50px;
 }
 
 body {

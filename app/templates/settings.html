@@ -1,1 +1,25 @@
 {% extends "base.html" %}
+
+{% block title %}
+  Settings
+{% endblock title %}
+
+{% block extraStyling %}
+  <link rel="stylesheet" href="../static/css/settings.css" />
+{% endblock extraStyling %}
+
+{% block body %}
+  <h1 id="closet-header">
+    Your Closet:
+  </h1>
+  <div id="closet">
+    <div class="card" style="width: 18rem;">
+      <img src="..." class="card-img-top" alt="...">
+      <div class="card-body">
+        <h5 class="card-title">Card title</h5>
+        <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
+        <a href="#" class="btn btn-primary">Go somewhere</a>
+      </div>
+    </div>
+  </div>
+{% endblock body %}
