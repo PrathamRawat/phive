@@ -38,7 +38,7 @@ def create_account():
     if getUser(username):
         flash('Username is taken', 'error')
         return redirect(url_for('sign_up'))
-    password = request.form['username']
+    password = request.form['password']
     if password != request.form['verify']:
         flash('Passwords do not match.', 'error')
         return redirect(url_for('sign_up'))
