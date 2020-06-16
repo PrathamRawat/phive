@@ -38,7 +38,7 @@ def create_account():
     if getUser(username):
         flash('Username is taken', 'error')
         return redirect(url_for('sign_up'))
-    password = request.form['username']
+    password = request.form['password']
     if password != request.form['verify']:
         flash('Passwords do not match.', 'error')
         return redirect(url_for('sign_up'))
@@ -61,7 +61,7 @@ def homepage():
             1 if 60 <= temp < 80 else 0,
             1 if 80 <= temp else 0
         ]]
-        rec = get_recommendations(session['uid'], w)[0]
+        rec = map(lambda x: x[0], get_recommendations(session['uid'], w))
         clothes = getAllClothing(session['uid'])
         magnitude = max(rec)
         outfit = []

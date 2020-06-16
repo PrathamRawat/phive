@@ -12,7 +12,7 @@ class Matrix:
         for y in range(len(m1)):
             row = []
             for x in range(len(m2[0])):
-                v1 = m1[x][:]
+                v1 = m1[y][:]
                 v2 = [i[x] for i in m2]
                 row.append(sum([v1[i] * v2[i] for i in range(len(v1))]))
             result.append(row)
