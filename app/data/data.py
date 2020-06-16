@@ -67,6 +67,43 @@ def addClothing(user_id, name, ctype, picture):
     db.close()  #close database
     return(new_id)
 
+def getUser(username):
+    """
+    checks if username exists
+    """
+    DB_FILE = "Drip.db"
+    db = sqlite3.connect(DB_FILE) #opens existing file or it makes new one if it does not exit
+    c = db.cursor()               #facilitate db ops
+    command = "SELECT username FROM users WHERE username = \"" + username + "\";"
+    c.execute(command)
+    result = c.fetchall()
+    try:
+        result[0][0]
+        print("valid")
+        return True
+    except:
+        print("already taken")
+        return False
+    db.commit() #save changes
+    db.close()  #close database
+    return(False)
+
+def getPassword(username):
+    """
+    returns password given username
+    """
+    DB_FILE = "Drip.db"
+    db = sqlite3.connect(DB_FILE) #opens existing file or it makes new one if it does not exit
+    c = db.cursor()               #facilitate db ops
+    command = "SELECT password FROM users WHERE username = \"" + username + "\";"
+    c.execute(command)
+    result = c.fetchall()
+    password = result[0][0]
+    db.commit() #save changes
+    db.close()  #close database
+    print(password)
+    return(password)
+
 def getWeight(user_id):
     """
     returns weight given user_id
@@ -164,6 +201,8 @@ def setOutfit(user_id, outfit, date):
 #getAllClothing(0)
 #changeWeight(2, 13.0)
 #createUsers()
+#getUser("onedsadas")
+#getPassword("one")
 
 db.commit() #save changes
 db.close()  #close database
