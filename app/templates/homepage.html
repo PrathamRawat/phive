@@ -33,13 +33,45 @@
     {% endfor %}
   </div>
 
-  <div>
-    {% for tem in temp %}
-      {{tem}}
-    {% endfor %}
-  </div>
+  <h1 class="header">
+    The Weather Today
+  </h1>
 
-  <div>
-    {{weather}}
+  <div class="form-block">
+    <div class="row">
+      <div class="col">
+        <h4 class="mini-header">
+          The Temperature Today:
+        </h4>
+        <div class="undertext">
+          {{temp.0}} &#176 C
+        </div>
+      </div>
+      <div class="col">
+        <h4 class="mini-header">
+          Minimum Temperature:
+        </h4>
+        <div class="undertext">
+          {{temp.1}} &#176 C
+        </div>
+      </div>
+      <div class="col">
+        <h4 class="mini-header">
+          Maximum Temperature:
+        </h4>
+        <div class="undertext">
+          {{temp.2}} &#176 C
+        </div>
+      </div>
+    </div>
+
+    <div>
+      <h4 class="mini-header">
+        The Weather:
+      </h4>
+      <div class="undertext">  
+        {{weather}}
+      </div>
+    </div>
   </div>
 {% endblock %}

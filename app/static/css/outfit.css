@@ -8,3 +8,21 @@
   border-color: #274060;
   margin-bottom: 10px;
 }
+
+.col{
+
+}
+
+.mini-header{
+  text-align: center;
+  color: white;
+  background-color: #335C81;
+  padding: 5px;
+  border-radius: 5px;
+  margin: 10px;
+}
+
+.undertext{
+  text-align: center;
+  font-size: 24px;
+}
