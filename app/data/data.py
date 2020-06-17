@@ -67,6 +67,20 @@ def addClothing(user_id, name, ctype, picture):
     db.close()  #close database
     return(new_id)
 
+def removeClothing(cid):
+    """
+    removes clothing
+    """
+    DB_FILE = "Drip.db"
+    db = sqlite3.connect(DB_FILE) #opens existing file or it makes new one if it does not exit
+    c = db.cursor()               #facilitate db ops
+    command = "DELETE FROM clothing WHERE \"clothing_id\"={};".format(cid)
+    print(command)
+    c.execute(command)
+    db.commit() #save changes
+    db.close()  #close database
+    return(None)
+
 def getUser(username):
     """
     checks if username exists

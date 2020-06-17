@@ -133,7 +133,7 @@ def settings():
     # print(type(clothes))
     return render_template("settings.html", clothes=clothes)
 
-@app.route("/remove_clothing", methods=['POST'])
+@app.route("/remove_clothing", methods=['GET', 'POST'])
 def remove_clothing():
     clothing_id = request.form['id']
     removeClothing(clothing_id)
