@@ -146,7 +146,9 @@ def add_clothing():
     ctype = request.form['ctype']
     addClothing(session['uid'], name, ctype, picture)
     matrix = Matrix.read(getWeight(session['uid']))
+    print(matrix)
     newm = Matrix.add_column(matrix, [0.1, 0.1, 0.1, 0.1, 0.1, 0.1, 0.1])
+    print(newm)
     changeWeight(session['uid'], Matrix.toString(newm))
     return redirect(url_for('settings'))
 

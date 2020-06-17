@@ -61,7 +61,7 @@ def addClothing(user_id, name, ctype, picture):
     q = c.fetchall()
     new_id = q[-1][0] + 1
     print(new_id)
-    command = "INSERT INTO clothing VALUES({},{},\"{}\",{},\"{}\")".format(new_id, user_id, name, ctype, picture)
+    command = "INSERT INTO clothing VALUES({},{},\"{}\",\"{}\",\"{}\")".format(new_id, user_id, name, ctype, picture)
     c.execute(command)
     db.commit() #save changes
     db.close()  #close database
@@ -114,6 +114,8 @@ def getWeight(user_id):
     command = "SELECT weights FROM users WHERE user_id = " + str(user_id)
     c.execute(command)
     result = c.fetchall()
+    if(len(result) == 0):
+        return []
     weight = result[0][0]
     db.commit() #save changes
     db.close()  #close database

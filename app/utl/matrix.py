@@ -29,6 +29,7 @@ class Matrix:
     
     @staticmethod
     def add_column(m, values):
+        print(m)
         if len(m) == 0:
             for x in values:
                 m.append([x])
@@ -37,9 +38,12 @@ class Matrix:
                 m[x].append(values[x])
         else:
             raise IncompatibleMatricesError('Column cannot be added to matrix')
+        return m
     
     @staticmethod
     def read(matrixstr):
+        if(matrixstr == []):
+            return []
         rows = matrixstr.split('\\')
         return list(map(lambda x: x.split('&'), rows))
 
