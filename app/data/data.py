@@ -62,7 +62,7 @@ def addClothing(user_id, name, ctype, picture):
     new_id = q[-1][0] + 1
     print(new_id)
     command = "INSERT INTO clothing VALUES({},{},\"{}\",{},\"{}\")".format(new_id, user_id, name, ctype, picture)
-    c.execute(new_id)
+    c.execute(command)
     db.commit() #save changes
     db.close()  #close database
     return(new_id)

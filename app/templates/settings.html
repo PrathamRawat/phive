@@ -36,18 +36,25 @@
     Your Closet:
   </h1>
   <div id="closet">
+    <!-- code to generate cards for each clothing piece -->
     <div class="card-columns">
       {% for clothing in clothes %}
       <div class="card" style="width: 18rem;">
-        <img src="{{clothing.3}}" class="card-img-top" alt="...">
+        <!-- clothing image -->
+        <img src={{clothing.3}} class="card-img-top" alt="...">
         <div class="card-body">
+          <!-- clothing name -->
           <h5 class="card-title">{{clothing.1}}</h5>
+          <!-- type -->
           <p class="card-text">
             {{clothing.2}}
           </p>
-          <center>
-            <button class="btn btn-primary">Remove</button>
-          </center>
+          <!-- remove button -->
+          <form action="/remove_clothing", method="POST">
+            <center>
+              <button id={{clothing.0}} class="btn btn-primary">Remove</button>
+            </center>
+          </form>
         </div>
       </div>
       {% endfor %}
