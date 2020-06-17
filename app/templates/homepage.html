@@ -6,6 +6,7 @@
 
 {% block extraStyling %}
   <link rel="stylesheet" href="../static/css/settings.css" />
+  <link rel="stylesheet" href="../static/css/outfit.css" />
 {% endblock %}
 
 {% block body %}
@@ -14,13 +15,21 @@
     Our Recommended Outfit
   </h1>
 
-  <div class="form-block">
+  <div class="container">
     {% for clothing in outfit %}
-      {% for part in clothing %}
-        <div>
-          {{part}}
+      <div class="card-block">
+        <div class="card">
+          <div class="row">
+            <div>
+              <img src={{clothing.3}} class="card-img" alt="...">
+            </div>
+            <div class="card-body">
+              <h3 class="card-title">{{clothing.1}}</h3>
+              <p class="card-text">{{clothing.2}}</p>
+            </div>
+          </div>
         </div>
-      {% endfor %}
+      </div>
     {% endfor %}
   </div>
 

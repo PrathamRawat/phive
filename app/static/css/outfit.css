@@ -1,0 +1,10 @@
+.card-block{
+  background-color: white;
+  padding: 10px;
+  padding-left: 25px;
+  border-radius: 20px;
+  border-style: solid;
+  border-width: 10px;
+  border-color: #274060;
+  margin-bottom: 10px;
+}
