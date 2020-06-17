@@ -10,6 +10,29 @@
 
 {% block body %}
   <h1 id="closet-header">
+    Add new clothes:
+  </h1>
+  <div id="form-block">
+    <form action="/add_clothing", method="POST">
+      <div class="form-group">
+        <label for="name">New Piece: </label>
+        <input class="input-box" type="text" name="name">
+      </div>
+      <div class="form-group">
+        <label for="picture">Picture URL; </label>
+        <input class="input-box" type="url" name="picture">
+      </div>
+      <div class="form-group">
+        <label for="ctype">Clothing type: </label>
+        <input class="input-box" type="text" name="ctype">
+      </div>
+      <center>  
+        <input type='submit' name='sub1' class="btn btn-primary" value="Register">
+      </center>
+    </form>
+  </div>
+
+  <h1 id="closet-header">
     Your Closet:
   </h1>
   <div id="closet">

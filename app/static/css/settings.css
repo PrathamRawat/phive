@@ -10,3 +10,22 @@
   margin-left: 20px;
   margin-right: 20px;
 }
+
+#form-block{
+  margin-left: 20px;
+  margin-right: 20px;
+  background-color: white;
+  padding: 10px;
+  border-radius: 10px;
+  border-style: solid;
+  border-width: 10px;
+  border-color: #274060;
+}
+
+.input-box{
+  width: 80%;
+}
+
+.btn{
+  width: 50%
+}
