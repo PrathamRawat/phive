@@ -9,10 +9,10 @@
 {% endblock extraStyling %}
 
 {% block body %}
-  <h1 id="closet-header">
+  <h1 class="header">
     Add new clothes:
   </h1>
-  <div id="form-block">
+  <div class="form-block">
     <form action="/add_clothing", method="POST">
       <div class="form-group">
         <label for="name">New Piece: </label>
@@ -32,7 +32,7 @@
     </form>
   </div>
 
-  <h1 id="closet-header">
+  <h1 class="header">
     Your Closet:
   </h1>
   <div id="closet">

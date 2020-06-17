@@ -1,4 +1,4 @@
-#closet-header{
+.header{
   padding: 15px;
   border-radius: 10px;
   margin: 20px;
@@ -11,7 +11,7 @@
   margin-right: 20px;
 }
 
-#form-block{
+.form-block{
   margin-left: 20px;
   margin-right: 20px;
   background-color: white;

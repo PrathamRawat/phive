@@ -24,7 +24,7 @@ def verify():
     if request.form['password'] == getPassword(username):
         session['uid'] = getUser(username)
         flash('Successfully logged in.', 'success')
-        return redirect(url_for('homepage'))
+        return redirect(url_for('home'))
     flash('Incorrect username/password combination!', 'error')
     return redirect(url_for('sign_in'))
 
@@ -44,7 +44,7 @@ def create_account():
         return redirect(url_for('sign_up'))
     session['uid'] = addUsers(username, password, '')
     flash('Account successfully created.', 'success')
-    return redirect(url_for('settings'))
+    return redirect(url_for('sign_in'))
 
 @app.route("/log_out")
 def log_out():
@@ -68,9 +68,10 @@ def homepage():
         ]]
         rec = get_recommendations(session['uid'], w)[0]
         clothes = getAllClothing(session['uid'])
+        # print(clothes)
         outfit = []
         magnitude = max(rec)
-        while len(rec) > 0 and 'bottom' not in [clothing[2] for clothing in outfit] and 'top' not in [clothing[2] for clothing in outfit] and magnitude > 0:
+        while len(rec) > 0 and len(clothes) > 0 and 'bottom' not in [clothing[2] for clothing in outfit] and 'top' not in [clothing[2] for clothing in outfit] and magnitude > 0:
             magnitude = max(rec)
             i = rec.index(magnitude)
             rec.pop(i)

@@ -59,7 +59,10 @@ def addClothing(user_id, name, ctype, picture):
     command = "SELECT clothing_id FROM clothing;"
     c.execute(command)
     q = c.fetchall()
-    new_id = q[-1][0] + 1
+    if (len(q) > 0):
+        new_id = q[-1][0] + 1
+    else:
+        new_id = 0
     print(new_id)
     command = "INSERT INTO clothing VALUES({},{},\"{}\",\"{}\",\"{}\")".format(new_id, user_id, name, ctype, picture)
     c.execute(command)

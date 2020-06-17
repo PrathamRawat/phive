@@ -1,1 +1,36 @@
 {% extends "base.html" %}
+
+{% block title %}
+  Outfit
+{% endblock title %}
+
+{% block extraStyling %}
+  <link rel="stylesheet" href="../static/css/settings.css" />
+{% endblock %}
+
+{% block body %}
+  <!-- outfit=outfit, temp=(temp,high,low), weather=name -->
+  <h1 class="header">
+    Our Recommended Outfit
+  </h1>
+
+  <div class="form-block">
+    {% for clothing in outfit %}
+      {% for part in clothing %}
+        <div>
+          {{part}}
+        </div>
+      {% endfor %}
+    {% endfor %}
+  </div>
+
+  <div>
+    {% for tem in temp %}
+      {{tem}}
+    {% endfor %}
+  </div>
+
+  <div>
+    {{weather}}
+  </div>
+{% endblock %}
