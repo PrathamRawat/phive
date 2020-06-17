@@ -46,6 +46,11 @@ def create_account():
     flash('Account successfully created.', 'success')
     return redirect(url_for('settings'))
 
+@app.route("/log_out")
+def log_out():
+    session.pop('uid')
+    return render_template("index.html")
+
 @app.route("/homepage")
 def homepage():
     # TODO: List recommendations if not chosen yet, otherwise list outfit chosen
@@ -61,7 +66,7 @@ def homepage():
             1 if 60 <= temp < 80 else 0,
             1 if 80 <= temp else 0
         ]]
-        rec = list(map(lambda x: x[0], get_recommendations(session['uid'], w)))
+        rec = get_recommendations(session['uid'], w)[0]
         clothes = getAllClothing(session['uid'])
         magnitude = max(rec)
         outfit = []
