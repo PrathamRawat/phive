@@ -80,3 +80,6 @@ modified Matrix class, changed how weights are stored in the database
 tanM -- 16:19:07
 added getUser and getPassword
 
+xiedengD -- 20:01:56
+made example settings page
+
