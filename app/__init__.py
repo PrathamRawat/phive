@@ -61,7 +61,7 @@ def homepage():
             1 if 60 <= temp < 80 else 0,
             1 if 80 <= temp else 0
         ]]
-        rec = list(map(lambda x: x[0], get_recommendations(session['uid'], w)))
+        rec = get_recommendations(session['uid'], w)[0]
         clothes = getAllClothing(session['uid'])
         magnitude = max(rec)
         outfit = []
