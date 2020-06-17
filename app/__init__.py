@@ -123,8 +123,8 @@ def update_weights():
 
 @app.route("/settings")
 def settings():
-    # clothes = getAllClothing(session['uid'])
-    # print(clothes)
+    clothes = getAllClothing(session['uid'])
+    print(clothes)
     return render_template("settings.html") #, clothes=clothes)
 
 @app.route("/remove_clothing", methods=['POST'])
