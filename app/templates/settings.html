@@ -39,7 +39,7 @@
     <!-- code to generate cards for each clothing piece -->
     <div class="card-columns">
       {% for clothing in clothes %}
-      <div class="card" style="width: 18rem;">
+      <div class="card">
         <!-- clothing image -->
         <img src={{clothing.3}} class="card-img-top" alt="...">
         <div class="card-body">
@@ -52,7 +52,8 @@
           <!-- remove button -->
           <form action="/remove_clothing", method="POST">
             <center>
-              <button id={{clothing.0}} class="btn btn-primary">Remove</button>
+              <input type="text" name="id" value={{clothing.0}} hidden>
+              <button class="btn btn-primary">Remove</button>
             </center>
           </form>
         </div>
