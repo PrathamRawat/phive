@@ -83,3 +83,6 @@ tanM -- 16:19:07
 xiedengD -- 20:01:56
 made example settings page
 
+xiedengD -- 00:13:17
+Added option to add clothes in settings
+
