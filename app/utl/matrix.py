@@ -5,7 +5,9 @@ class Matrix:
 
     @staticmethod
     def multiply(m1, m2):
-        if len(m1[0]) != len(m2):
+        print(m1)
+        print(m2)
+        if len(list(m1[0])) != len(list(m2)):
             raise IncompatibleMatricesError('Matrices cannot be multiplied!')
             return -1
         result = []
@@ -14,7 +16,7 @@ class Matrix:
             for x in range(len(m2[0])):
                 v1 = m1[y][:]
                 v2 = [i[x] for i in m2]
-                row.append(sum([v1[i] * v2[i] for i in range(len(v1))]))
+                row.append(sum([float(v1[i]) * float(v2[i]) for i in range(len(v1))]))
             result.append(row)
         return result
 

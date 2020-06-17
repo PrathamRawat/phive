@@ -128,7 +128,8 @@ def getWeight(user_id):
     command = "SELECT weights FROM users WHERE user_id = " + str(user_id)
     c.execute(command)
     result = c.fetchall()
-    if(len(result) == 0):
+    print(result)
+    if(len(result) == 0 or result == [("",)]):
         return []
     weight = result[0][0]
     db.commit() #save changes
@@ -192,7 +193,7 @@ def getOutfit(user_id, date):
     day = c.fetchone()
     db.commit() #save changes
     db.close()  #close database
-    if day[0] == date:
+    if day != None and day[0] == date:
         return day[1]
     return []
 

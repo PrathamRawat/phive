@@ -68,9 +68,10 @@ def homepage():
         ]]
         rec = get_recommendations(session['uid'], w)[0]
         clothes = getAllClothing(session['uid'])
-        magnitude = max(rec)
         outfit = []
-        while 'bottom' not in [clothing[2] for clothing in outfit] and 'top' not in [clothing[2] for clothing in outfit] and magnitude > 0:
+        magnitude = max(rec)
+        while len(rec) > 0 and 'bottom' not in [clothing[2] for clothing in outfit] and 'top' not in [clothing[2] for clothing in outfit] and magnitude > 0:
+            magnitude = max(rec)
             i = rec.index(magnitude)
             rec.pop(i)
             c = clothes.pop(i)
