@@ -26,7 +26,7 @@
         <label for="ctype">Clothing type: </label>
         <input class="input-box" type="text" name="ctype">
       </div>
-      <center>  
+      <center>
         <input type='submit' name='sub1' class="btn btn-primary" value="Register">
       </center>
     </form>
@@ -37,20 +37,21 @@
   </h1>
   <div id="closet">
     <div class="card-columns">
+      {% for clothing in clothes %}
       <div class="card" style="width: 18rem;">
-        <img src="..." class="card-img-top" alt="...">
+        <img src="{{clothing.3}}" class="card-img-top" alt="...">
         <div class="card-body">
-          <h5 class="card-title">Example clothing Name</h5>
-          <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
+          <h5 class="card-title">{{clothing.1}}</h5>
+          <p class="card-text">
+            {{clothing.2}}
+          </p>
           <center>
             <button class="btn btn-primary">Remove</button>
           </center>
         </div>
       </div>
+      {% endfor %}
     </div>
   </div>
-  {% for clothing in clothes %}
-    {{clothing}}
-  {% endfor %}
 
 {% endblock body %}
