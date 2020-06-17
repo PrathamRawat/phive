@@ -74,13 +74,13 @@ def getUser(username):
     DB_FILE = "Drip.db"
     db = sqlite3.connect(DB_FILE) #opens existing file or it makes new one if it does not exit
     c = db.cursor()               #facilitate db ops
-    command = "SELECT username FROM users WHERE username = \"" + username + "\";"
+    command = "SELECT user_id FROM users WHERE username = \"" + username + "\";"
     c.execute(command)
     result = c.fetchall()
     try:
         result[0][0]
         print("valid")
-        return True
+        return result[0][0]
     except:
         print("already taken")
         return False

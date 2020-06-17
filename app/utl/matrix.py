@@ -12,7 +12,7 @@ class Matrix:
         for y in range(len(m1)):
             row = []
             for x in range(len(m2[0])):
-                v1 = m1[x][:]
+                v1 = m1[y][:]
                 v2 = [i[x] for i in m2]
                 row.append(sum([v1[i] * v2[i] for i in range(len(v1))]))
             result.append(row)
@@ -41,9 +41,9 @@ class Matrix:
     @staticmethod
     def read(matrixstr):
         rows = matrixstr.split('\\')
-        return map(lambda x: x.split('&'), rows)
+        return list(map(lambda x: x.split('&'), rows))
 
     @staticmethod
     def toString(matrix):
-        rows = map(lambda x: '&'.join(map(str, x)), matrix)
+        rows = list(map(lambda x: '&'.join(map(str, x)), matrix))
         return '\\'.join(rows)
