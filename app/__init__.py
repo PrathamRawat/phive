@@ -46,6 +46,11 @@ def create_account():
     flash('Account successfully created.', 'success')
     return redirect(url_for('settings'))
 
+@app.route("/log_out")
+def log_out():
+    session.pop('uid')
+    return render_template("index.html")
+
 @app.route("/homepage")
 def homepage():
     # TODO: List recommendations if not chosen yet, otherwise list outfit chosen
