@@ -135,7 +135,7 @@ def settings():
 
 @app.route("/remove_clothing", methods=['POST'])
 def remove_clothing():
-    clothing_id = request['id']
+    clothing_id = request.form['id']
     removeClothing(clothing_id)
     return redirect(url_for('settings'))
 
